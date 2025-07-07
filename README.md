@@ -7,8 +7,9 @@ This starter repo uses PyTorch to classify UrbanSound8K sounds.
 
 ## How to use
 
-1. Download [UrbanSound8K](https://urbansounddataset.weebly.com/urbansound8k.html)
-   Unzip inside `data/UrbanSound8K/`.
+1. ```
+   pip install soundata
+   ```
 
 2. Install:
    ```
