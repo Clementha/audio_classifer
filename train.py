@@ -19,7 +19,7 @@ def train():
             sr=config['sr'],
             n_mels=config['n_mels']
         )
-    dataloader = DataLoader(dataset, batch_size=config['batch_size'], shuffle=True)
+    dataloader = DataLoader(dataset, batch_size=config['batch_size'], shuffle=True, num_workers=4, pin_memory=True)
 
     if config['model_type'] == 'cnn':
         model = EnvSoundCNN(num_classes=config['num_classes'])
@@ -56,7 +56,7 @@ def train():
         wandb.log({"loss": running_loss / len(dataloader), "accuracy": acc})
         print(f"Epoch [{epoch+1}/{config['epochs']}], Loss: {running_loss:.4f}, Acc: {acc:.2f}%")
 
-    torch.save(model.state_dict(), f"{config['run_name']}_final.pth")
+    torch.save(model.state_dict(), f"./artifacts/{config['run_name']}_final.pth")
 
 if __name__ == "__main__":
     train()

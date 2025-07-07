@@ -32,7 +32,7 @@ class UrbanSoundDataset(Dataset):
             audio = librosa.resample(audio, orig_sr=sr, target_sr=self.sr)
             sr = self.sr
 
-        melspec = librosa.feature.melspectrogram(y=audio, sr=sr, n_mels=self.n_mels)
+        melspec = librosa.feature.melspectrogram(y=audio, sr=sr, n_mels=self.n_mels, n_fft=512)
         log_melspec = librosa.power_to_db(melspec, ref=np.max)
         log_melspec = torch.tensor(log_melspec).float()
 
