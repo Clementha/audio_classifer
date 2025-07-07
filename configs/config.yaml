@@ -1,6 +1,6 @@
 project_name: urbansound8k
 run_name: cnn_baseline
-model_type: cnn   # or transformer
+model_type: transformer   # or transformer
 
 num_classes: 10
 epochs: 20

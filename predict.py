@@ -2,10 +2,18 @@ import torch
 import librosa
 import numpy as np
 from models.cnn import EnvSoundCNN  # or EnvSoundTransformer
+from models.transformer import EnvSoundTransformer
+from utils import load_config
+
+config = load_config('configs/config.yaml')
 
 # --- Load model ---
-model = EnvSoundCNN(num_classes=10)
-model.load_state_dict(torch.load("./artifacts/cnn_baseline_final.pth", map_location="cpu"))
+if config['model_type'] == 'cnn':
+    model = EnvSoundCNN(num_classes=10)
+    model.load_state_dict(torch.load("./artifacts/cnn_baseline_final.pth", map_location="cpu"))
+else:
+    model = EnvSoundTransformer(num_classes=10)
+    model.load_state_dict(torch.load("./artifacts/transformer_baseline_final.pth", map_location="cpu"))
 model.eval()
 
 # --- Preprocess clip ---
@@ -27,7 +35,11 @@ if num_frames < max_frames:
 elif num_frames > max_frames:
     log_melspec = log_melspec[..., :max_frames]
 
-log_melspec = log_melspec.unsqueeze(0).unsqueeze(0)
+if config['model_type'] == "cnn":
+    log_melspec = log_melspec.unsqueeze(0).unsqueeze(0)
+else:
+    log_melspec = log_melspec.unsqueeze(0)   
+
 
 # --- Predict ---
 with torch.no_grad():
