@@ -1,0 +1,10 @@
+project_name: urbansound8k
+run_name: cnn_baseline
+model_type: cnn   # or transformer
+
+num_classes: 10
+epochs: 20
+batch_size: 32
+learning_rate: 0.001
+n_mels: 128
+sr: 22050

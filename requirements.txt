@@ -1,0 +1,5 @@
+torch
+torchaudio
+librosa
+wandb
+PyYAML
