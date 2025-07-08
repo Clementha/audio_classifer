@@ -17,8 +17,8 @@ else:
 model.eval()
 
 # --- Preprocess clip ---
+audio_path = "./samples/streetmusic.wav"
 #audio_path = "./samples/dogbark.flac"
-audio_path = "./samples/dogbark.flac"
 sr = 22050
 n_mels = 128
 max_frames = 348
